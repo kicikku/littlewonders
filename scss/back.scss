@@ -1,0 +1,18 @@
+@import "reset.scss";
+
+body {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+.inner-center {
+	padding-left: 65px;
+	padding-right: 65px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.inner-grid {
+	display: grid;
+	grid-gap: 15px;
+}

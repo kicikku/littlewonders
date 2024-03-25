@@ -1,0 +1,107 @@
+
+{% extends "layout.html" %}
+{% block title %}
+<title>Register for {{cfg("kicikku", "site-name")}}</title>
+{% endblock %}
+{% block alternative %}
+<div class="inner-grid">
+<div class="inner-login">
+<div class="inner-form">
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <h3>
+      Register for {{cfg("kicikku", "site-name")}}
+      <small>
+        or <a href="/login">log in</a>
+      </small>
+    </h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <form class="login-form" action="/api/signup" method="POST">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+           type="text"
+           name="username"
+           id="username"
+           value="{{ username }}"
+           class="ck-input ck-input-variant-default form-control {{valid.cls("username")}}"
+           required
+           autocomplete="username"
+           {% if not username %} autofocus{% endif %} />
+        {{valid.summary("username")}}
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input
+           type="email"
+           name="email"
+           id="email"
+           value="{{ email }}"
+           class="ck-input ck-input-variant-default form-control {{valid.cls("email")}}"
+           required
+           {% if username and not email %} autofocus{% endif %} />
+        {{valid.summary("email")}}
+        {% if email and "+" in email %}
+        <input type="hidden" name="allow-plus-in-email" value="yes" />
+        <div class="alert alert-danger">
+          <strong>Warning</strong>: in order to use {{cfg("kicikku",
+          "site-name")}} effectively, you must be able to both send <em>and</em>
+          receive emails from this email address. To continue, submit the form
+          again.
+        </div>
+        {% endif %}
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+           type="password"
+           name="password"
+           id="password"
+           value="{{ password }}"
+           class="ck-input ck-input-variant-default form-control {{valid.cls("password")}}"
+           required
+           autocomplete="new-password"
+           {% if username and email and not password %} autofocus{% endif %} />
+        {{valid.summary("password")}}
+      </div>
+      <button class="btn btn-primary pull-right" type="submit">
+        Register   
+	  </button>
+      <p class="clearfix"></p>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    {{valid.summary()}}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <div class="alert alert-warning">
+      <strong>Privacy notice</strong>:
+      {{cfg("kicikku", "site-name")}} collects the minimum amount of your personal
+      information which is necessary to faciliate the features of our services.
+      We do not collect or process any of your personal information for the
+      purposes of marketing or analytics. We do not send unsolicited marketing
+      emails. Your information is only shared with third-parties if it is
+      necessary to facilitate our services, and you will be warned before this
+      occurs and given an opportunity to prevent the transmission of your
+      information.
+      <a
+        href="{{cfg("kicikku", "privacy-policy", default="https://kicikku.com/privacy.md")}}"
+        rel="noopener"
+        target="_blank"
+      >Privacy policy</a>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

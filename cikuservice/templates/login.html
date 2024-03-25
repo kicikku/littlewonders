@@ -1,0 +1,155 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>Log in to {{cfg("kicikku", "site-name")}}</title>
+{% endblock %}
+{% block contentg %}
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <h3>
+      Log in to {{cfg("kicikku", "site-name")}}
+      <small>
+        or <a href="/register">register</a>
+      </small>
+    </h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+	<button hx-get="/help" hx-target="#modal-cover"><span>Help</span></button>
+    <form method="POST" action="/login">
+	 <!-- csrf_token -->
+      {% if login_context %}
+      <div class="alert alert-info">
+        {{login_context}}
+      </div>
+      {% endif %}
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+           type="text"
+           name="username"
+           id="username"
+           class="form-control {{valid.cls("username")}}"
+           value="{{username or ""}}"
+           required
+           autocomplete="username"
+           {% if not username %} autofocus{% endif %} />
+		<!-- valid.summary("username") -->
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+           type="password"
+           name="password"
+           id="password"
+           class="form-control {{valid.cls("password")}}"
+           required
+           autocomplete="current-password"
+           {% if username %} autofocus{% endif %} />
+		<!-- valid.summary("password") -->
+      </div>
+      <input type="hidden" name="return_to" value="{{return_to or ""}}" />
+	  <!-- valid.summary -->
+      <button class="btn btn-primary pull-right" type="submit">
+		  Log in
+      </button>
+      <p>
+
+        <a href="/forgot">Forgot your password?</a>
+      </p>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block modal %}
+
+<div id="modal-cover"></div>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="inner-center">
+	<div class="inner-grid">
+		<div class="inner-login">
+			<div class="inner-form">
+					<form class="login-form" hx-post="/login" hx-swap="beforeend">
+					 <div class="form-group">
+     				   <label for="username">Username</label>
+     				   <input class="ck-input ck-input-variant-default"
+     				      type="text"
+     				      name="username"
+     				      id="username"
+     				      class="form-control {{ valid.cls("username")}}"
+     				      value="{{username or ""}}"
+     				      required
+     				      autocomplete="username"
+     				      {% if not username %} autofocus{% endif %} />
+								<!-- valid.summary("username") -->
+     				 </div>
+     				 <div class="form-group">
+     				   <label for="password">Password</label>
+					   <input class="ck-input ck-input-variant-default"
+     				      type="password"
+     				      name="password"
+     				      id="password"
+     				      class="form-control {{valid.cls("password")}}"
+     				      required
+     				      autocomplete="current-password"
+     				      {% if username %} autofocus{% endif %} />
+								<!-- valid.summary("password") -->
+     				 </div>
+					 <button type="submit">Create Account</button>
+					</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+
+{% block alternative %}
+
+<div class="inner-center">
+	<div class="inner-grid">
+		<div class="inner-login">
+			<div class="inner-form">
+				<form hx-post="/api/login" hx-swap="beforeend">
+					 <div class="form-group">
+     				   <label for="username">Username</label>
+     				   <input class="ck-input ck-input-variant-default"
+     				      type="text"
+     				      name="username"
+     				      id="username"
+     				      class="form-control {{ valid.cls("username")}}"
+     				      value="{{username or ""}}"
+     				      required
+     				      autocomplete="username"
+     				      {% if not username %} autofocus{% endif %} />
+					   {{ valid.summary("username") }}
+     				 </div>
+     				 <div class="form-group">
+     				   <label for="password">Password</label>
+					   <input class="ck-input ck-input-variant-default"
+     				      type="password"
+     				      name="password"
+     				      id="password"
+     				      class="form-control {{valid.cls("password")}}"
+     				      required
+     				      autocomplete="current-password"
+     				      {% if username %} autofocus{% endif %} />
+					   {{ valid.summary("password") }}
+     				 </div>
+					 <button class="btn btn-primary" type="submit">Create Account</button>
+					 {{valid.summary()}}
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+

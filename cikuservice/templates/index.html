@@ -1,0 +1,30 @@
+  
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <p>
+        Welcome to <strong>KICIKKU</strong>! This is the account, billing,
+        and security management hub for
+        <a href="/">
+			{{cfg("kicikku", "site-name")}}</a>
+			{{cfg("kicikku", "site-blurb")}}
+      </p>
+      <ul>
+        <li>PGP encrypted and signed emails from KICIKKU services</li>
+        <li>Two-factor authentication with TOTP</li>
+        <li>Detailed audit logs of account activity</li>
+        <li>Fine-grained third-party OAuth access controls</li>
+      </ul>
+      <a class="btn btn-primary" href="/register">
+
+      </a>
+      or
+      <a href="/login">
+      login to get started.
+	  </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

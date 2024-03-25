@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>Register for {{cfg("kicikku", "site-name")}}</title>
+{% endblock %}
+{% block alternative %}
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <h3>
+      Register for {{cfg("kicikku", "site-name")}}
+      <small>
+        or <a href="/login">log in</a>
+      </small>
+    </h3>
+  </div>
+</div>
+<form
+  class="row"
+  action="{{url_for("auth.register_POST")}}"
+  method="POST"
+  style="margin-bottom: 0" {# Look. I know. #}
+>
+  <div class="col-md-5 offset-md-1 event-list">
+    <div class="event">
+      <h3>Register as a contributor</h3>
+      <p>
+        <strong>Signing up to contribute to a project here?</strong>
+        <br />
+        You may sign up to participate in projects hosted on
+        {{cfg("kicikku", "site-name")}} for free. If you decide to host your own
+        projects here in the future, you can convert to a paid account later.
+      </p>
+      <button
+        type="submit"
+        name="payment"
+        value="no"
+        class="btn btn-primary btn-block"
+      >
+        Sign up for free       
+	  </button>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="event">
+      <h3>Register as a maintainer</h3>
+      <p>
+        <strong>Want to host your own projects here?</strong>
+        <br />
+        Projects hosted on {{cfg("kicikku", "site-name")}} are expected to pay for
+        their account. Financial aid is available for those in need. You can
+        cancel at any time without losing access to your data.
+        <a href="/pricing" rel="noopener" target="_blank">
+          Pricing details
+        </a>
+      </p>
+      <button
+        type="submit"
+        name="payment"
+        value="yes"
+        class="btn btn-primary btn-block"
+      >
+        Sign up with payment       
+	  </button>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <div class="alert alert-info">
+      Contributors can also skip registration entirely. You may submit or
+      comment on tickets, participate in discussions, and send patches to
+      projects on {{cfg("kicikku", "site-name")}}, without signing up for an
+      account. You can find links to participate via email throughout the
+      logged-out version of many services.
+    </div>
+  </div>
+</div>
+{% endblock %}
